@@ -1,52 +1,42 @@
-// Задача 3 - 1
-// CRUD для свойств объекта
-// С - create(создать)
-// R - read(читать)
-// U - update(обновить)
-// D - delete (удалить)
-// Напиши скрипт, который, для объекта user, последовательно:
+// Задача 4 - 1
+// Callback функция
+// Функция mapArray(array, cb), принимает 1 - м параметром array - массив чисел, а вторым параметром cb - функцию обратного вызова(callback).Функция mapArray создает новый массив numbers и заполняет его числами из массива array преобразованными функцией cb.
 
-// добавляет поле 'mood' со значением 'happy'
-// добавляет поле 'full time' со значением true
-// заменяет значение 'hobby' на 'skydiving'
-// заменяет значение 'premium' на false
-// в переменную message записывает содержимое объекта user:
-// для переменной keys присваивает массив свойств объекта, используя метод Object.keys()
-// с помощью оператора for...of
-// в формате ключ: значение
-// c переносом строки('\n')
+// Оформи создание массива numbers нужной длины используя new Array() и необходимый аргумент для задания длины, равной длине array.
 
-let message = '';
-const user = {
-  age: 20,
-  hobby: 'html',
-  name: 'Mango',
-  premium: true,
-};
+// Напиши функцию обратного вызова addIndex, которая принимает два параметра - element и index и возвращает число - сумму element и index(сложение).
 
-//Write code under this line
-user.mood = 'happy';
-user['full time'] = true;
-user.hobby = 'skydiving';
-user.premium = false;
-
-const keys = Object.keys(user);
-const values = Object.values(user);
-
-for (const key of keys) {
-  message += `${key} : ${user[key]}\n`;
-}
-
-// console.log(values);
+// Напиши функцию обратного вызова subIndex, которая принимает два параметра - element и index и возвращает число - разность element и index(вычитание).
 
 // Write code under this line
+const addIndex = (element, index) => element + index;
+// Write code under this line
+const subIndex = (element, index) => element - index;
+// Write code under this line
 
-console.log(message);
-/*
-'age : 20
-hobby : skydiving
-name : Mango
-premium : false
-mood : happy
-"full time" : true
-' */
+function mapArray(array, cb) {
+  'use strict';
+  // Write code under this line
+  function Array(arraySize) {
+    const newArray = [];
+    newArray.legnth = arraySize;
+    return newArray;
+  }
+
+  const numbers = new Array(array.length);
+
+  for (let i = 0; i < array.length; i += 1) {
+    const element = array[i];
+    const index = i;
+    numbers[i] = cb(element, index);
+  }
+  return numbers;
+}
+
+const arr = [1, 2, 3, 4, 5];
+
+//console.log(mapArray(arr, addIndex));
+// [1, 3, 5, 7, 9]
+
+//console.log(mapArray(arr, subIndex));
+// [1, 1, 1, 1, 1]

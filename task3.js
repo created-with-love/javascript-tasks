@@ -1,58 +1,40 @@
-// Задача 3 - 3
-// Поиск наибольшего значения среди свойств объекта
-// Напиши функцию findBestEmployee(employees), которая принимает объект сотрудников
-// и возвращает имя самого продуктивного(который выполнил больше всех задач).
-// Сотрудники и кол - во выполненных задач содержатся как свойства объекта в
-// формате "имя": "кол-во задач".
+// Задача 4 - 3
+// Callback функция для получения одного вычисляемого значения массива
+// Функции add, sub и mult принимают два параметра - accum и element, возвращает число - сумму, разность или произведение параметров.
 
-const findBestEmployee = function (employees) {
+// Дополни тело функции reduceArray строкой присвоения accum вызова функции cb.Функция reduceArray должна будет подсчитать сумму или разность или произведение всех элементов массива в зависимости от того какая именно из трех функция(add, mult, sub) будет передана в качестве cb.
+
+const add = (accum, element) => accum + element;
+const mult = (accum, element) => accum * element;
+const sub = (accum, element) => accum - element;
+
+function reduceArray(array, cb, initial) {
   'use strict';
-  // Write code under this line
-  let bestEmployee = '';
-  let topEmployeeScore = 0;
-  const keys = Object.keys(employees);
-
-  for (const key of keys) {
-    if (employees[key] > topEmployeeScore) {
-      bestEmployee = key;
-      topEmployeeScore = employees[key];
-    }
+  let i;
+  let accum;
+  if (arguments.length >= 3) {
+    accum = initial;
+    i = 0;
   }
+  if (arguments.length === 2) {
+    accum = array[0];
+    i = 1;
+  }
+  for (i; i < array.length; i += 1) {
+    const element = array[i];
+    // Write code under this line
+    accum = cb(accum, element);
+  }
+  return accum;
+}
 
-  console.log(
-    `Лучший работник месяц - ${bestEmployee}, который(я) выполнил(а) ${topEmployeeScore} задач`,
-  );
-  return bestEmployee;
-};
+const arr = [1, 2, 3, 4, 5];
 
-// for (const key of keys) {
-//     message += `${key} : ${user[key]}\n`;
-// }
+console.log(reduceArray(arr, add)); // 15
+console.log(reduceArray(arr, add, 10)); // 25
 
-// Объекты и ожидаемый результат
-const developers = {
-  ann: 29,
-  david: 35,
-  helen: 1,
-  lorence: 99,
-};
-console.log(findBestEmployee(developers));
-// 'lorence'
+console.log(reduceArray(arr, mult)); // 120
+console.log(reduceArray(arr, mult, 10)); // 1200
 
-const supports = {
-  poly: 12,
-  mango: 17,
-  ajax: 4,
-};
-console.log(findBestEmployee(supports));
-// 'mango'
-
-const sellers = {
-  lux: 147,
-  david: 21,
-  kiwi: 19,
-  chelsy: 38,
-};
-
-console.log(findBestEmployee(sellers));
-// 'lux'
+console.log(reduceArray(arr, sub)); // -13
+console.log(reduceArray(arr, sub, 10)); // -5

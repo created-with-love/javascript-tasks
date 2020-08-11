@@ -1,36 +1,51 @@
-// Задача 3 - 4
-// Суммирование значений свойств объекта
-// Напиши функцию countTotalSalary(employees) принимающую объект зарплат.
-// Функция считает общую сумму зарплаты работников и возвращает ее.
-// Каждое поле объекта, передаваемого в функцию, имеет вид "имя": "зарплата".
+// Задача 4 - 5
+// bind для замены this в методах объекта
+// Оформи вызов метода invokeInventoryAction таким образом, чтобы в качестве this для методов
 
-const countTotalSalary = function (employees) {
-  'use strict';
-  // Write code under this line
-  let totalSalary = 0;
-  const values = Object.values(employees);
-  console.log(values);
-
-  for (const value of values) {
-    totalSalary += value;
-  }
-
-  return totalSalary;
+// inventory.add
+// inventory.remove выступал объект inventory
+const inventory = {
+  items: ['Knife', 'Gas mask'],
+  add(itemName) {
+    this.items.push(itemName);
+    return `Adding ${itemName} to inventory`;
+  },
+  remove(itemName) {
+    this.items = this.items.filter(item => item !== itemName);
+    return `Removing ${itemName} from inventory`;
+  },
 };
 
-// Объекты и ожидаемый результат
-const developers = {
-  mango: 300,
-  poly: 250,
-  alfred: 450,
+const invokeInventoryAction = function (itemName, action) {
+  const act = action(itemName);
+  const msg = `Invoking action on ${itemName}`;
+  return { act, msg };
 };
-console.log(countTotalSalary(developers));
-// 1000
 
-const supports = {
-  kiwi: 200,
-  lux: 150,
-  chelsy: 150,
-};
-console.log(countTotalSalary(supports));
-// 500
+const invokeAdd = invokeInventoryAction(
+  'Medkit',
+  inventory.add.bind(inventory), // Write code in this line
+);
+const arrayAdd = [...inventory.items];
+/* 
+//console.log(invokeAdd);
+//{ act: 'Adding Medkit to inventory', msg: 'Invoking action on Medkit' }
+
+//console.log(arrayAdd);
+// ['Knife', 'Gas mask', 'Medkit']
+*/
+
+const invokeRemove = invokeInventoryAction(
+  'Gas mask',
+  inventory.remove.bind(inventory), // Write code in this line
+);
+
+const arrayRemove = [...inventory.items];
+
+/*
+//console.log(invokeRemove);
+//{ act: 'Removing Gas mask from inventory', msg: 'Invoking action on Gas mask' }
+
+//console.log(arrayRemove);
+// ['Knife', 'Medkit']
+*/
