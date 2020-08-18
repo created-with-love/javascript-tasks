@@ -1,51 +1,49 @@
-// Задача 4 - 5
-// bind для замены this в методах объекта
-// Оформи вызов метода invokeInventoryAction таким образом, чтобы в качестве this для методов
+// Задача 5 - 4
+// переиспользование методов класса
+// Напиши класс StringBuilder.На вход он получает один параметр - строку, которую записывает в свойство _value.
 
-// inventory.add
-// inventory.remove выступал объект inventory
-const inventory = {
-  items: ['Knife', 'Gas mask'],
-  add(itemName) {
-    this.items.push(itemName);
-    return `Adding ${itemName} to inventory`;
-  },
-  remove(itemName) {
-    this.items = this.items.filter(item => item !== itemName);
-    return `Removing ${itemName} from inventory`;
-  },
-};
+// Добавь классу следующий функционал:
 
-const invokeInventoryAction = function (itemName, action) {
-  const act = action(itemName);
-  const msg = `Invoking action on ${itemName}`;
-  return { act, msg };
-};
+// Геттер value - возвращает текущее значение поля _value
+// Метод append(str) - получает параметр str(строку) и добавляет ее в конец _value
+// Метод prepend(str) - получает параметр str(строку) и добавляет ее в начало value
+// Метод pad(str) - получает параметр str(строку) и добавляет ее в начало и в конец _value
+// Метод pad должен использовать методы append и prepend
 
-const invokeAdd = invokeInventoryAction(
-  'Medkit',
-  inventory.add.bind(inventory), // Write code in this line
-);
-const arrayAdd = [...inventory.items];
-/* 
-//console.log(invokeAdd);
-//{ act: 'Adding Medkit to inventory', msg: 'Invoking action on Medkit' }
+// Write code under this line
+class StringBuilder {
+  constructor(value) {
+    this._value = value;
+  }
 
-//console.log(arrayAdd);
-// ['Knife', 'Gas mask', 'Medkit']
-*/
+  get value() {
+    return this._value;
+  }
 
-const invokeRemove = invokeInventoryAction(
-  'Gas mask',
-  inventory.remove.bind(inventory), // Write code in this line
-);
+  append(str) {
+    return (this._value += str);
+  }
 
-const arrayRemove = [...inventory.items];
+  prepend(str) {
+    return (this._value = str + this._value);
+  }
 
-/*
-//console.log(invokeRemove);
-//{ act: 'Removing Gas mask from inventory', msg: 'Invoking action on Gas mask' }
+  pad(str) {
+    this.append(str);
+    this.prepend(str);
+  }
+}
 
-//console.log(arrayRemove);
-// ['Knife', 'Medkit']
-*/
+console.log(typeof StringBuilder);
+// 'function'
+
+const builder = new StringBuilder('.');
+
+builder.append('^');
+console.log(builder.value); // '.^'
+
+builder.prepend('^');
+console.log(builder.value); // '^.^'
+
+builder.pad('=');
+console.log(builder.value); // '=^.^='
