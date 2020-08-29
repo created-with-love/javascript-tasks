@@ -1,65 +1,19 @@
-// Задача 5 - 3
-// использование методов класса
-// Напиши класс Storage, который будет создавать объекты для управления складом товаров.При вызове будет получать один аргумент - начальный массив товаров, и записывать его в свойство items.
+// Задача 6 - 3
+// filter, map
+// Получи массив имен пользователей(значение свойства name) по полу(значение свойства gender).
 
-// Добавь методы класса:
+// Используй деструктурирующее присваивание для параметра функции({ name }) без пробелов и переносов на новую строку.
 
-// getItems() - возвращает массив текущих товаров
-// addItem(item) - получает новый товар и добавляет его к текущим
-// removeItem(item) - получает товар и, если он есть, удаляет его из текущих
+// Используй только перебирающие методы массива которые не изменяют(не мутируют) исходный массив.Т.е.нельзя использовать for, splice, push и т.п.мутирующие методы.
 
 // Write code under this line
+const getUsersWithGender = (array, sex) =>
+  array.filter(({ gender }) => sex == gender).map(({ name }) => name);
+// console.log(getUsersWithGender(users, 'male'));
 
-class Storage {
-  constructor(args) {
-    this.items = args;
-  }
-  getItems() {
-    return this.items;
-  }
-
-  addItem(item) {
-    this.items.push(item);
-  }
-
-  removeItem(item) {
-    if (this.items.includes(item)) {
-      const itemPosition = this.items.indexOf(item, 0);
-      this.items.splice(itemPosition, 1);
-    }
-  }
-}
-
-console.log(typeof Storage);
-// 'function'
-
-const goods = ['Нанитоиды', 'Пролонгер', 'Железные жупи', 'Антигравитатор'];
-
-const storage = new Storage(goods);
-
-console.log(storage.getItems());
 /* [
-  'Нанитоиды',
-  'Пролонгер',
-  'Железные жупи',
-  'Антигравитатор'
-] */
-
-storage.addItem('Дроид');
-console.log(storage.getItems());
-/* [
-  'Нанитоиды',
-  'Пролонгер',
-  'Железные жупи',
-  'Антигравитатор',
-  'Дроид'
-] */
-
-storage.removeItem('Пролонгер');
-console.log(storage.getItems());
-/* [
-  'Нанитоиды',
-  'Железные жупи',
-  'Антигравитатор',
-  'Дроид'
+  "Moore Hensley",
+  "Ross Vazquez",
+  "Carey Barr",
+  "Blackburn Dotson"
 ] */

@@ -1,26 +1,38 @@
-// Задача 5 - 1
-// function-constructor
-// Напиши функцию - конструктор Account, которая создает объект со свойствами login и email.
+// Задача 6 - 1
+// map
+// Получи массив имен всех пользователей(свойство name) используя деструктурирующее присваивание для параметра функции({ name }) без пробелов и переносов на новую строку.
 
-// В prototype функции - конструктора добавь метод getInfo(), который возвращает строку со значениями свойств login и email объекта.
+// Используй только перебирающие методы массива которые не изменяют(не мутируют) исходный массив.Т.е.нельзя использовать for, splice, push и т.п.мутирующие методы.
+
+// Деструктурирующее присваивание для параметра функции
+// PS Деструктурирующее присваивание(ДП):
+
+// Объект как параметр без ДП
+// const object = { num: 2 }
+// function getNum(obj) { return obj.num; }
+// console.log(getNum(object)) // 2
+// ДП
+// const object = { num: 2 }
+// // const num  =  object.num;
+// const { num } = object;
+// console.log(num) // 2
+// Объект как параметр c ДП
+// const object = { num: 2 }
+// //function getNum (obj) { return obj.num; }
+// function getNum({ num }) { return num; }
+// console.log(getNum(object)) // 2
 
 // Write code under this line
-const Account = function (login, email) {
-  this.login = login;
-  this.email = email;
+const getUserNames = array => array.map(({ name }) => name);
 
-  Account.prototype.getInfo = function () {
-    return `login : ${this.login}, email: ${this.email}`;
-  };
-};
+console.log(getUserNames(users));
 
-console.log(typeof Account.prototype.getInfo);
-// 'function'
-
-const mango = new Account('Mangozedog', 'mango@dog.woof');
-console.log(mango.getInfo());
-// 'login : Mangozedog, email: mango@dog.woof'
-
-const poly = new Account('Poly', 'poly@mail.com');
-console.log(poly.getInfo());
-// 'login : Poly, email: poly@mail.com'
+/* [
+  "Moore Hensley",
+  "Sharlene Bush",
+  "Ross Vazquez",
+  "Elma Head",
+  "Carey Barr",
+  "Blackburn Dotson",
+  "Sheree Anthony",
+] */
