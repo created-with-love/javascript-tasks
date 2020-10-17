@@ -6,13 +6,13 @@
 
 // const x = 13;
 
-// // num больше 10 ?
+// num больше 10 ?
 // const larger = num > 10; // true
 
-// // num меньше 100 ?
+// num меньше 100 ?
 // const smaller = 100 > num; // true
 
-// // num находитя между 10 и 100 ?
+// num находитя между 10 и 100 ?
 // const between = smaller && larger; // true
 // Создание анонимных объектов:
 
